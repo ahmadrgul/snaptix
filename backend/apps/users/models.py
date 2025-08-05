@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .managers import CustomUserManager
+from phonenumber_field.modelfields import PhoneNumberField
 
 class CustomUser(AbstractUser):
     """
@@ -22,3 +23,10 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
+
+class Organizer(CustomUser):
+    """
+    Organizer model extends the CustomUser model,
+    it includes a phone number field but can be extended in future.
+    """
+    phone = PhoneNumberField(unique=True)
