@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'phonenumber_field',
     'apps.users',
 ]
@@ -91,3 +92,10 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 # phone number field settings
 PHONENUMBER_DEFAULT_REGION = 'PK'
+
+# REST framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
