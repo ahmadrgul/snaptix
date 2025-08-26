@@ -8,6 +8,7 @@ from rest_framework.renderers import MultiPartRenderer, HTMLFormRenderer
 class EventViewSet(viewsets.ModelViewSet):
     serializer_class = EventSerializer
     permission_classes = [IsOwnerOrReadOnly]
+    owner_field = 'organizer'
     # renderer_classes = [MultiPartRenderer, HTMLFormRenderer]
 
     def get_queryset(self):
@@ -43,3 +44,4 @@ class TicketViewSet(viewsets.ModelViewSet):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
     permission_classes = [IsOwnerOrReadOnly]
+    owner_field = 'event.organizer'
