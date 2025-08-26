@@ -20,7 +20,7 @@ class EventViewSet(viewsets.ModelViewSet):
                 return qs
             if user.role == 'organizer':
                 # organizers can access their own events
-                return qs.filter(organizer=user)
+                return qs.filter(organizer=user.organizer)
             
         if self.action == 'list':
             # public can access only listed events unless they direclty retrieve a specific event
@@ -34,7 +34,7 @@ class EventViewSet(viewsets.ModelViewSet):
         
         if user.is_authenticated and user.role == 'organizer':
             # only authenticated organizers can create events
-            serializer.save(organizer=self.request.user)
+            serializer.save(organizer=self.request.user.organizer)
             
         else:
             raise PermissionDenied("Only authenticated organizers can create events.")

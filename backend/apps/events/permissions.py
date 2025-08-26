@@ -12,4 +12,4 @@ class IsOwnerOrReadOnly(BasePermission):
             return True
         
         # write permissions are only allowed to the assoicated organizer
-        return user.is_authenticated and obj.organizer == user
+        return user.is_authenticated and obj.organizer == user.organizer
