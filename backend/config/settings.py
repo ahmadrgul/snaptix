@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'djmoney',
     'apps.users',
     'apps.events',
+    'apps.payments',
 ]
 
 MIDDLEWARE = [
