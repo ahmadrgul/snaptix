@@ -55,8 +55,7 @@ class Event(models.Model):
     def save(self, *args, **kwargs):
         import stripe
         stripe.api_key = os.getenv('STRIPE_SECRET_KEY')
-
-        if not self.pk and not self.is_free:
+        if self.pk is None and not self.is_free:
             product = stripe.Product.create(
                 name=self.title,
                 description=self.description,
@@ -66,7 +65,7 @@ class Event(models.Model):
 
             stripe_price = stripe.Price.create(
                 unit_amount=int(self.price.amount * 100),
-                currency=self.price.currency.lower(),
+                currency=self.price.currency,
                 product=product.id,
             )
             self.stripe_price_id = stripe_price.id
@@ -78,9 +77,8 @@ class Event(models.Model):
 
 class Ticket(models.Model):
     STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('valid', 'Valid'),
-        ('invalid', 'Invalid'),
+        ('unpaid', 'Unpaid'),
+        ('paid', 'Paid'),
         ('checked_in', 'Checked In'),
         ('expired', 'Expired'),
         ('cancelled', 'Cancelled'),
@@ -93,3 +91,9 @@ class Ticket(models.Model):
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.status == 'paid' and self.event.sold_tickets < self.event.capacity:
+            self.event.sold_tickets += 1
+            self.event.save()
+        super().save(*args, **kwargs)
