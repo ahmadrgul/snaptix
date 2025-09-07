@@ -4,6 +4,7 @@ certifi==2025.8.3
 charset-normalizer==3.4.3
 dj-database-url==3.0.1
 Django==5.2.4
+django-cors-headers==4.7.0
 django-money==3.5.4
 django-phonenumber-field==8.1.0
 djangorestframework==3.16.0
