@@ -55,7 +55,7 @@ class Event(models.Model):
     def save(self, *args, **kwargs):
         import stripe
         stripe.api_key = os.getenv('STRIPE_SECRET_KEY')
-        if self.pk is None and not self.is_free:
+        if self._state.adding and not self.is_free:
             product = stripe.Product.create(
                 name=self.title,
                 description=self.description,
