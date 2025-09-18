@@ -22,7 +22,7 @@ const Hero = () => {
             <h4 className="text-center font-mono">Enter the event id below and book your spot in seconds</h4>
           </div>
           <form>
-            <label className="flex border rounded-full w-xl h-14 pl-4 pr-1 items-center bg-white">
+            <label className="flex rounded-full w-xl h-14 pl-4 pr-1 items-center bg-white shadow-2xl">
               <input
                 className="w-full  outline-none h-full border-none"
                 placeholder="Enter event id e.g abcd-efgh-ijkl-mnop-qrst"
