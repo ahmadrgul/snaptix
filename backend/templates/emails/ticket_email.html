@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <body style="font-family: Arial, sans-serif; color: #333; background: #fafafa; padding: 20px;">
+    <div style="max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px;">
+      
+      <h2 style="color: #444;">Hi {{ ticket.attendee_name }},</h2>
+      <p>
+        Thank you for booking your ticket with us! 🎉<br/>
+        Your reservation for <b>{{ event.title }}</b> is confirmed.
+      </p>
+
+      <h3>📍 Event Details:</h3>
+      <ul>
+        <li><b>Event:</b> {{ event.title }}</li>
+        <li><b>Date:</b> {{ event.start_datetime|date:"l, F j, Y" }}</li>
+        <li><b>Time:</b> {{ event.start_datetime|time:"h:i A" }}</li>
+        <li><b>Venue:</b> {{ event.venue_name }}, {{ event.address }}, {{ event.city }}, {{ event.country }}</li>
+      </ul>
+
+      <h3>🎟 Your Ticket Information:</h3>
+      <ul>
+        <li><b>Ticket ID:</b> {{ ticket.id }}</li>
+        <li><b>Attendee:</b> {{ ticket.attendee_name }}</li>
+      </ul>
+
+      <p>👉 Please present the QR code below at the event entrance for entry:</p>
+      <div style="text-align:center; margin: 20px 0;">
+        <img src="cid:ticket_qr" alt="QR Code" width="200"/>
+      </div>
+
+      <hr style="margin: 20px 0;"/>
+
+      <h3>🔑 Important Notes:</h3>
+      <ul>
+        <li>Please arrive at least <b>30 minutes</b> before the event.</li>
+        <li>Keep this email handy — your QR code <b>is your ticket</b>.</li>
+        <li>One ticket = one entry. Tickets are <b>non-transferable</b> unless stated.</li>
+      </ul>
+
+      <p style="margin-top: 20px;">
+        We can’t wait to see you at <b>{{ event.title }}</b>! 🎶🎭
+      </p>
+
+      <hr style="margin: 20px 0;"/>
+      <p style="color: gray; font-size: 12px; text-align: center;">
+        Best regards,<br/>
+        The {{ company_name }} Team <br/>
+        <a href="mailto:{{ support_email }}">{{ support_email }}</a> | {{ support_phone }}
+      </p>
+    </div>
+  </body>
+</html>

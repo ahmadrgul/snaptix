@@ -29,9 +29,8 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'djmoney',
     'apps.users',
-    # 'apps.events',
+    'apps.events',
     'apps.payments',
-    'apps.events.apps.EventsConfig',
 ]
 
 MIDDLEWARE = [
@@ -50,7 +49,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
